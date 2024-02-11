@@ -1,13 +1,13 @@
-#define LENGTH 2
 #ifndef MY_MAT_H
-#include <stdbool.h>
-/*'A'*/
-void getNumbers(int A[LENGTH][LENGTH]);
+#define MY_MAT_H
 
-/*'B'*/
-bool isPath(int A[LENGTH][LENGTH], int i, int j);
+#define LENGTH 10
+# define TRUE 1
+# define FALSE 0
 
-/*'C'*/
-void shortest(int A[LENGTH][LENGTH], int i, int j);
+void scanTheMatrix(int mat[LENGTH][LENGTH]);
+void dinamicPrograming(int [LENGTH][LENGTH],int ,int ); // ?????
+void isPath(int [LENGTH][LENGTH],int,int );
+void shortest(int [LENGTH][LENGTH],int ,int);
 
 #endif

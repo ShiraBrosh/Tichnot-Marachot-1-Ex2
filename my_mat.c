@@ -1,116 +1,71 @@
-// #include <stdio.h>
-// #include<stdbool.h>
-// #include "my_mat.h"
-// #define True 1
-// #define False 0
-
-// void getNumbers(int A[LENGTH][LENGTH]){
-// 	int count = 0;	
-// 	for(int i=0;i<LENGTH;i++){
-// 		for(int j=0;j<LENGTH;j++){
-// 			if(count <= LENGTH*LENGTH){
-// 			 if((scanf(" %d",&A[i][j])) == 1) count++;
-// 			}
-// 		}
-// 	}
-// 	printf("THE MATRIX IS FULL");
-// }
-
-// int isPath(int A [LENGTH][LENGTH],int i,int j){
-// 	if (A[i][j]!=0){
-// 		return True;
-// 	}
-// 	else{
-// 		return False;
-// 	}
-// }
-
-// void dinamic_programing(int A [LENGTH][LENGTH],int i, int j){
-// 	for(int k=0;k<LENGTH;k++){
-// 		for(int i=0;i<LENGTH;i++){
-// 			for(int j=0;j<LENGTH;j++){
-// 				if(i==j){
-// 				}
-// 				else if (A[i][k]==0 || A[k][j]==0){
-// 				}
-// 				else{
-// 					if(A[i][j] == 0){
-// 						A[i][j] = A[i][k]+A[k][j];
-// 					}
-// 					else if(A[i][j] > A[i][k]+A[k][j]){
-// 						A[i][j] = A[i][k]+A[k][j];
-// 					}
-// 				}
-// 			}
-// 		}	
-// 	}	
-// }
-
-// void shortest(int A [LENGTH][LENGTH],int i,int j){
-// 	dinamic_programing(A,i,j);
-// 	if(A[i][j] == 0){
-// 		printf("-1\n");
-// 	}
-// 	else{
-	
-// 		printf("%d\n",A[i][j]);
-// 	}
-// }
-
 #include <stdio.h>
-#include <stdbool.h>
+#include <math.h>
 #include "my_mat.h"
 
-#define True 1
-#define False 0
-#define LENGTH 10 // Assuming a predefined value for LENGTH
 
-void getNumbers(int A[LENGTH][LENGTH]) {
-    int count = 0;	
-    for (int i = 0; i < LENGTH; i++) {
-        for (int j = 0; j < LENGTH; j++) {
-            if (count < LENGTH * LENGTH) {
-                if (scanf("%d", &A[i][j]) == 1) 
-                    count++;
-            }
+void scanTheMatrix(int mat[LENGTH][LENGTH]){
+	int count=0;
+	int flag= TRUE;
+    for(int i=0; i<LENGTH && (flag==TRUE) ; i++){
+        for(int j=0; j<LENGTH && (flag==TRUE) ; j++){
+          if ((scanf("%d",&mat[i][j])) == 1){
+				count++;
+		  }
+			if (count == (LENGTH*LENGTH)){
+				flag= FALSE;	
+				//printf("choose function\n");			
+			}
         }
     }
-    printf("THE MATRIX IS FULL");
+	//printf("scan");
 }
 
-bool isPath(int A[LENGTH][LENGTH], int i, int j) {
-    return A[i][j] != 0;
-}
-
-void dynamic_programming(int A[LENGTH][LENGTH], int i, int j) {
-    for (int k = 0; k < LENGTH; k++) {
-        for (int i = 0; i < LENGTH; i++) {
-            for (int j = 0; j < LENGTH; j++) {
-                if (i == j) {
-                    continue;
-                }
-                else if (A[i][k] == 0 || A[k][j] == 0) {
-                    continue;
-                }
-                else {
-                    if (A[i][j] == 0) {
-                        A[i][j] = A[i][k] + A[k][j];
-                    }
-                    else if (A[i][j] > A[i][k] + A[k][j]) {
-                        A[i][j] = A[i][k] + A[k][j];
-                    }
-                }
-            }
+void printMat(int A [LENGTH][LENGTH]){
+	for(int i=0; i<LENGTH ; i++){
+        for(int j=0; j<LENGTH ; j++){
+       		 printf("%d ", A[i][j]);
         }
+		printf("\n");
     }
 }
 
-void shortest(int A[LENGTH][LENGTH], int i, int j) {
-    dynamic_programming(A, i, j);
-    if (A[i][j] == 0) {
-        printf("-1\n");
-    }
-    else {
-        printf("%d\n", A[i][j]);
-    }
+void isPath(int A [LENGTH][LENGTH],int i,int j){
+	if (A[i][j] != 0){
+		printf("True\n");
+	}
+	else{
+		printf("False\n");
+	}
+}
+
+/*Using dinamic programing with Floyd–Warshall_algorithm*/	
+void dinamicPrograming(int mat [LENGTH][LENGTH],int i,int j) {
+	for(int k=0;k<LENGTH;k++){
+		for(int i=0;i<LENGTH;i++){
+			for(int j=0;j<LENGTH;j++){
+				if(i==j){
+				}
+				else if (mat[i][k]==0 || mat[k][j]==0){
+				}
+				else{
+					if(mat[i][j] == 0){
+						mat[i][j] = mat[i][k]+mat[k][j];
+					}
+					else if(mat[i][j] > mat[i][k]+mat[k][j]){
+						mat[i][j] = mat[i][k]+mat[k][j];
+					}
+				}
+			}
+		}	
+	}	
+}
+
+void shortest(int mat[LENGTH][LENGTH],int i,int j){
+    dinamicPrograming(mat, i, j);
+	if(mat[i][j] == 0){
+		printf("-1\n");
+	}
+	else{
+		printf("%d\n",mat[i][j]);
+	}
 }
