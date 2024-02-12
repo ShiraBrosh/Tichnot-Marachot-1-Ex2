@@ -40,9 +40,7 @@ int main() {
     int weights[NUM_PRODUCTS] = {0};
     // Insert input of products, values, and weights
     for (int i = 0; i < NUM_PRODUCTS; i++) {
-        scanf(" %c", &products[i]);
-        scanf("%d", &values[i]);
-        scanf("%d", &weights[i]);
+         scanf(" %c %d %d", &products[i], &values[i], &weights[i]);
     }
     // print results
     int maxProfit = chooseItems(weights, values, selected_bool);
